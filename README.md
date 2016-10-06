@@ -1,0 +1,1 @@
+Take into use with `curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc` 
