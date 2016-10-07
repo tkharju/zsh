@@ -40,4 +40,9 @@ alias ls='ls --color=auto'
 alias l='ls -lah --color=auto'
 alias -g ...='cd ../../'
 alias -g ....='cd ../../../'
+alias rsync-copy="rsync -avz --progress -h"
+alias rsync-move="rsync -avz --progress -h --remove-source-files"
+alias rsync-update="rsync -avzu --progress -h"
+alias rsync-synchronize="rsync -avzu --delete --progress -h"
+
 
