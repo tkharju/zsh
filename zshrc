@@ -64,6 +64,9 @@ alias rsync-synchronize="rsync -avzu --delete --progress -h"
 
 # Helper functions
 dump_db () {
-  sudo -u postgres pg_dump -Fc $1 >$1-`date -I`.dump
+  dump_file="$1-`date -I`.dump"
+  echo "Running: sudo -u postgres pg_dump -Fc $1 >$dump_file"
+  sudo -u postgres pg_dump -Fc $1 >$dump_file
+  ls -lah $dump_file
 }
 
