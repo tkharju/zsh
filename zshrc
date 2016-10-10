@@ -32,10 +32,27 @@ export HISTSIZE=2000
 export SAVEHIST=$HISTSIZE
 export HISTFILE="$HOME/.zsh_history"
 
+# Dirstack
+DIRSTACKSIZE=20
+DIRSTACKFILE="$HOME/.zdirs"
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+
+setopt AUTO_PUSHD PUSHD_SILENT PUSHD_TO_HOME
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_MINUS
+
+# Key bindings
 bindkey -v
 bindkey -M vicmd 'k' history-beginning-search-backward
 bindkey -M vicmd 'j' history-beginning-search-forward
 
+# Aliases
 alias ls='ls --color=auto'
 alias l='ls -lah --color=auto'
 alias -g ...='cd ../../'
