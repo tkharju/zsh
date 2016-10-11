@@ -51,6 +51,7 @@ setopt PUSHD_MINUS
 bindkey -v
 bindkey -M vicmd 'k' history-beginning-search-backward
 bindkey -M vicmd 'j' history-beginning-search-forward
+bindkey "^R" history-incremental-pattern-search-backward
 
 # Aliases
 alias ls='ls --color=auto'
