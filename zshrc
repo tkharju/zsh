@@ -65,6 +65,7 @@ alias rsync-synchronize="rsync -avzu --delete --progress -h"
 alias activate_production="export DJANGO_SETTINGS_MODULE=project.production"
 alias activate_staging="export DJANGO_SETTINGS_MODULE=project.staging"
 alias activate_local="export DJANGO_SETTINGS_MODULE=local_settings"
+alias rootme="sudo -E su"
 
 # Helper functions
 dump_db () {
