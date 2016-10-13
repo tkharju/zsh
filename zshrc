@@ -1,3 +1,8 @@
+# Install custom completions under ~/.zsh/completions
+# e.g. to install salt completions
+# mkdir -p ~/.zsh/completions && curl "https://raw.githubusercontent.com/saltstack/salt/develop/pkg/zsh_completion.zsh" > ~/.zsh/completions/_salt
+fpath=( ~/.zsh/completions $fpath )
+
 autoload -Uz compinit promptinit colors
 compinit
 promptinit
