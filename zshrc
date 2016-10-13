@@ -88,6 +88,8 @@ alias activate_production="export DJANGO_SETTINGS_MODULE=project.production"
 alias activate_staging="export DJANGO_SETTINGS_MODULE=project.staging"
 alias activate_local="export DJANGO_SETTINGS_MODULE=local_settings"
 alias rootme="sudo -E su"
+alias rootzsh="sudo -E zsh -l"
+alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc"
 
 # Exports
 export LANG="en_US.UTF-8"
@@ -103,5 +105,5 @@ dump_db () {
   ls -lah $dump_file
 }
 
-
 # vim: tw=0
+#
