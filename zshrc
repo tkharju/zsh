@@ -21,8 +21,8 @@ color="green"
 if [ "$USER" = "root" ]; then
     color="red"
 fi;
-prompt="[%T][%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M%{$reset_color%}]
-%{$fg[cyan]%}[%~%b]%{$reset_color%}
+prompt="[%T]%{$fg[green]%}[%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M]%{$reset_color%}
+%{$fg[cyan]%}[%~]%{$reset_color%}
 $ "
 RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
 
@@ -69,6 +69,12 @@ alias activate_production="export DJANGO_SETTINGS_MODULE=project.production"
 alias activate_staging="export DJANGO_SETTINGS_MODULE=project.staging"
 alias activate_local="export DJANGO_SETTINGS_MODULE=local_settings"
 alias rootme="sudo -E su"
+
+# Exports
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US:en"
+export LC_CTYPE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
 # Helper functions
 dump_db () {
