@@ -26,9 +26,22 @@ color="green"
 if [ "$USER" = "root" ]; then
     color="red"
 fi;
+
+export VIRTUAL_ENV_DISABLE_PROMPT=yes
+
+function virtenv_indicator {
+  if [[ -z $VIRTUAL_ENV  ]] then
+    psvar[1]=''
+  else
+    psvar[1]=${VIRTUAL_ENV##*/}
+  fi
+}
+
+add-zsh-hook precmd virtenv_indicator
+
 prompt="[%T]%{$fg[green]%}[%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M]%{$reset_color%}
 %{$fg[cyan]%}[%~]%{$reset_color%}
-$ "
+%{$fg[yellow]%}%(1V.(%1v).)%{$reset_color%} $ "
 RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
 
 # History
@@ -89,3 +102,5 @@ dump_db () {
   ls -lah $dump_file
 }
 
+
+# vim: tw=0
