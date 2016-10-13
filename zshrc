@@ -17,11 +17,13 @@ precmd() { vcs_info }
 
 # Prompt
 setopt PROMPT_SUBST
-color="blue"
+color="green"
 if [ "$USER" = "root" ]; then
     color="red"
 fi;
-prompt="%{$fg[$color]%}%n%{$reset_color%}@%U%{$fg[yellow]%}%M%{$reset_color%}%u %B%~%b "
+prompt="[%T][%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M%{$reset_color%}]
+%{$fg[cyan]%}[%~%b]%{$reset_color%}
+$ "
 RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
 
 # History
@@ -56,6 +58,7 @@ bindkey "^R" history-incremental-pattern-search-backward
 # Aliases
 alias ls='ls --color=auto'
 alias l='ls -lah --color=auto'
+alias ll='ls -lAh --color=auto'
 alias -g ...='cd ../../'
 alias -g ....='cd ../../../'
 alias rsync-copy="rsync -avz --progress -h"
