@@ -101,8 +101,8 @@ export LC_ALL="en_US.UTF-8"
 # Helper functions
 dump_db () {
   dump_file="$1-`date -I`.dump"
-  echo "Running: sudo -u postgres pg_dump -Fc $1 >$dump_file"
-  sudo -u postgres pg_dump -Fc $1 >$dump_file
+  echo "Running: sudo -u postgres pg_dump -Fc $1 -f $dump_file"
+  sudo -u postgres pg_dump -Fc $1 -f $dump_file
   ls -lah $dump_file
 }
 
