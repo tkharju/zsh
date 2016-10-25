@@ -41,7 +41,7 @@ add-zsh-hook precmd virtenv_indicator
 
 prompt="[%T]%{$fg[green]%}[%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M]%{$reset_color%}
 %{$fg[cyan]%}[%~]%{$reset_color%}
-%{$fg[yellow]%}%(1V.(%1v).) %{$reset_color%}$ "
+%{$fg[yellow]%}%(1V.(%1v).)%{$reset_color%}$ "
 RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
 
 # History
