@@ -45,6 +45,9 @@ prompt="[%T]%{$fg[green]%}[%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M]%{
 RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
 
 # History
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
 setopt hist_ignore_all_dups
 setopt share_history
 setopt hist_verify
@@ -69,16 +72,18 @@ setopt PUSHD_MINUS
 
 # Key bindings
 bindkey -v
-bindkey -M vicmd 'k' history-beginning-search-backward
-bindkey -M vicmd 'j' history-beginning-search-forward
+bindkey -M vicmd 'k' history-beginning-search-backward-end
+bindkey -M vicmd 'j' history-beginning-search-forward-end
 bindkey "^R" history-incremental-pattern-search-backward
 
 # Aliases
 alias ls='ls --color=auto'
 alias l='ls -lah --color=auto'
 alias ll='ls -lAh --color=auto'
-alias -g ...='cd ../../'
-alias -g ....='cd ../../../'
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
 alias rsync-copy="rsync -avz --progress -h"
 alias rsync-move="rsync -avz --progress -h --remove-source-files"
 alias rsync-update="rsync -avzu --progress -h"
