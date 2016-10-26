@@ -94,7 +94,7 @@ alias activate_staging="export DJANGO_SETTINGS_MODULE=project.staging"
 alias activate_local="export DJANGO_SETTINGS_MODULE=local_settings"
 alias rootme="sudo -E su"
 alias rootzsh="sudo -E zsh -l"
-alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc"
+alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc && source $HOME/.zshrc"
 alias salt="noglob salt"
 
 # Exports
