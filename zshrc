@@ -96,6 +96,7 @@ alias rootme="sudo -E su"
 alias rootzsh="sudo -E zsh -l"
 alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc && source $HOME/.zshrc"
 alias salt="noglob salt"
+alias tail_logs="tail -f /var/log/{messages,syslog,**/*.log}|ccze"
 
 # Exports
 export LANG="en_US.UTF-8"
