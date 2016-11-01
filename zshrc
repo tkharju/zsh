@@ -98,6 +98,7 @@ alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zs
 alias salt="noglob salt"
 alias tail_logs="tail -f **/*.log|ccze"
 alias tail_syslogs="tail -f /var/log/{messages,syslog,**/*.log}|ccze"
+alias drun='docker run --rm -i -t -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v $(pwd):/home/foo/foo'
 
 # Exports
 export LANG="en_US.UTF-8"
