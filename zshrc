@@ -101,7 +101,7 @@ alias tail_syslogs="tail -f /var/log/{messages,syslog,**/*.log}|ccze"
 alias drun='docker run --rm -i -t -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v $(pwd):/home/foo/foo'
 alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold blue)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias gc="git commit -v"
-alias install_vimrc="git clone -b server git@github.com:tkharju/vim $HOME/.vim; vim"
+alias install_vimrc="git clone -b server https://github.com/tkharju/vim.git $HOME/.vim; vim"
 
 # Exports
 export LANG="en_US.UTF-8"
