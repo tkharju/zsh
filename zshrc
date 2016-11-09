@@ -111,6 +111,7 @@ export LANG="en_US.UTF-8"
 export LANGUAGE="en_US:en"
 export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
+export EDITOR=vim
 
 # Helper functions
 dump_db () {
@@ -132,5 +133,7 @@ install_security_updates () {
   echo "Installing updates"
   sudo unattended-upgrade -v
 }
+
+[[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh ]]
 
 # vim: tw=0
