@@ -119,6 +119,7 @@ haltu_dump_db () {
   ls -lah $dump_file
 }
 
+# For Ubuntu servers
 haltu_remove_old_kernels () {
   echo "Current kernel"
   uname -a
@@ -132,6 +133,7 @@ haltu_install_security_updates () {
   sudo unattended-upgrade -v
 }
 
+# Usage: $ haltu_check_certificate_dates app.seepra.fi
 haltu_check_certificate_dates (){
   echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates |awk -F'=' '{ print $2 }'
 }
@@ -143,6 +145,13 @@ currdate() {
 }
 add-zsh-hook preexec currdate
 
+# You can add to ~/.zsh/local.zsh your mercurial and git settings
+# E.g:
+# export HGUSER=Tino Kiviharju <tino.kiviharju@haltu.fi>
+# export GIT_AUTHOR_NAME=Tino Kiviharju
+# export GIT_AUTHOR_EMAIL=tino.kiviharju@haltu.fi
+# export GIT_COMMITTER_NAME=Tino Kiviharju
+# export GIT_COMMITTER_EMAIL=tino.kiviharju@haltu.fi
 [[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh ]]
 
 # vim: tw=0
