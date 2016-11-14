@@ -16,19 +16,18 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git hg
 zstyle ':vcs_info:*' get-revision true
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:hg*:*' formats "%{$fg[yellow]%}%c%{$fg[green]%}%u%{$reset_color%} [%{$fg[blue]%}%b%{$reset_color%}] %{$fg[yellow]%}%s%{$reset_color%}"
-zstyle ':vcs_info:git*:*' formats "%{$fg[yellow]%}%c%{$fg[green]%}%u%{$reset_color%} [%{$fg[blue]%}%b@%.6i%{$reset_color%}] %{$fg[yellow]%}%s%{$reset_color%}"
+zstyle ':vcs_info:hg*:*' formats "%{$fg[blue]%}[%s:%b]%{$reset_color%} %{$fg[green]%}%u%{$reset_color%}"
+zstyle ':vcs_info:git*:*' formats "%{$fg[blue]%}[%s:%b:%.6i]%{$reset_color%} %{$fg[green]%}%u %c%{$reset_color%}"
 precmd() { vcs_info }
 
 # Prompt
-setopt PROMPT_SUBST
+setopt prompt_subst
 color="green"
 if [ "$USER" = "root" ]; then
     color="red"
 fi;
 
 export VIRTUAL_ENV_DISABLE_PROMPT=yes
-
 function virtenv_indicator {
   if [[ -z $VIRTUAL_ENV  ]] then
     psvar[1]=''
@@ -39,10 +38,9 @@ function virtenv_indicator {
 
 add-zsh-hook precmd virtenv_indicator
 
-prompt="[%T]%{$fg[green]%}[%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M]%{$reset_color%}
-%{$fg[cyan]%}[%~]%{$reset_color%}
-%{$fg[yellow]%}%(1V.(%1v).)%{$reset_color%}$ "
-RPROMPT='${vim_mode} ${vcs_info_msg_0_}'
+prompt='[%T]%{$fg[green]%}[%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M]%{$reset_color%}${vcs_info_msg_0_}
+%{$fg[yellow]%}%(1V.(%1v).)%{$reset_color%}%{$fg[cyan]%}[%~]%{$reset_color%}
+%(!.#.$) '
 
 # History
 autoload history-search-end
@@ -114,37 +112,46 @@ export LC_ALL="en_US.UTF-8"
 export EDITOR=vim
 
 # Helper functions
-dump_db () {
+haltu_dump_db () {
   dump_file="$1-`date -I`.dump"
   echo "Running: sudo -u postgres pg_dump -Fc $1 -f $dump_file"
   sudo -u postgres pg_dump -Fc $1 -f $dump_file
   ls -lah $dump_file
 }
 
-remove_old_kernels () {
+# For Ubuntu servers
+haltu_remove_old_kernels () {
   echo "Current kernel"
   uname -a
   echo $(dpkg --list | grep linux-image | awk '{ print $2  }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2  }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge
 }
 
-install_security_updates () {
+haltu_install_security_updates () {
   echo "Packages to be installed"
   /usr/lib/update-notifier/apt-check -p
   echo "Installing updates"
   sudo unattended-upgrade -v
 }
 
-check_certificate_dates (){
+# Usage: $ haltu_check_certificate_dates app.seepra.fi
+haltu_check_certificate_dates (){
   echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates |awk -F'=' '{ print $2 }'
 }
 
 # Helper for creating e.g. backups. Use: "filename-$DSTAMP.bak"
 export DSTAMP
 currdate() {
-    DSTAMP=$(date -I)
+  DSTAMP=$(date -I)
 }
 add-zsh-hook preexec currdate
 
+# You can add to ~/.zsh/local.zsh your mercurial and git settings
+# E.g:
+# export HGUSER=Tino Kiviharju <tino.kiviharju@haltu.fi>
+# export GIT_AUTHOR_NAME=Tino Kiviharju
+# export GIT_AUTHOR_EMAIL=tino.kiviharju@haltu.fi
+# export GIT_COMMITTER_NAME=Tino Kiviharju
+# export GIT_COMMITTER_EMAIL=tino.kiviharju@haltu.fi
 [[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh ]]
 
 # vim: tw=0
