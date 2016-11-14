@@ -10,6 +10,7 @@ colors
 
 setopt completealiases
 setopt extendedglob
+setopt correct
 
 # VCS info
 autoload -Uz vcs_info
