@@ -134,6 +134,10 @@ install_security_updates () {
   sudo unattended-upgrade -v
 }
 
+check_certificate_dates (){
+  echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates |awk -F'=' '{ print $2 }'
+}
+
 [[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh ]]
 
 # vim: tw=0
