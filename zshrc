@@ -114,27 +114,27 @@ export LC_ALL="en_US.UTF-8"
 export EDITOR=vim
 
 # Helper functions
-dump_db () {
+haltu_dump_db () {
   dump_file="$1-`date -I`.dump"
   echo "Running: sudo -u postgres pg_dump -Fc $1 -f $dump_file"
   sudo -u postgres pg_dump -Fc $1 -f $dump_file
   ls -lah $dump_file
 }
 
-remove_old_kernels () {
+haltu_remove_old_kernels () {
   echo "Current kernel"
   uname -a
   echo $(dpkg --list | grep linux-image | awk '{ print $2  }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2  }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge
 }
 
-install_security_updates () {
+haltu_install_security_updates () {
   echo "Packages to be installed"
   /usr/lib/update-notifier/apt-check -p
   echo "Installing updates"
   sudo unattended-upgrade -v
 }
 
-check_certificate_dates (){
+haltu_check_certificate_dates (){
   echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates |awk -F'=' '{ print $2 }'
 }
 
