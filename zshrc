@@ -3,7 +3,7 @@
 # mkdir -p ~/.zsh/completions && curl "https://raw.githubusercontent.com/saltstack/salt/develop/pkg/zsh_completion.zsh" > ~/.zsh/completions/_salt
 fpath=( ~/.zsh/completions $fpath )
 
-autoload -Uz compinit promptinit colors
+autoload -Uz compinit promptinit colors up-line-or-beginning-search down-line-or-beginning-search
 compinit
 promptinit
 colors
@@ -47,6 +47,8 @@ prompt='[%T]%{$fg[green]%}[%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M]%{
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
 setopt hist_ignore_all_dups
 setopt share_history
 setopt hist_verify
@@ -73,6 +75,8 @@ setopt PUSHD_MINUS
 bindkey -v
 bindkey -M vicmd 'k' history-beginning-search-backward-end
 bindkey -M vicmd 'j' history-beginning-search-forward-end
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^R" history-incremental-pattern-search-backward
 
 # Aliases
