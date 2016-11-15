@@ -135,8 +135,16 @@ haltu_install_security_updates () {
 }
 
 # Usage: $ haltu_check_certificate_dates app.seepra.fi
-haltu_check_certificate_dates (){
+haltu_check_certificate_dates () {
   echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates |awk -F'=' '{ print $2 }'
+}
+
+# List top 20 prosesses with most open file descriptors
+# Output format: <amount of open fd> <pid> <command>
+haltu_top_20_open_file_descriptors () {
+  for x in `ps -eF| awk '{ print $2  }'`
+    do echo `ls /proc/$x/fd 2> /dev/null | wc -l` $x `cat /proc/$x/cmdline 2> /dev/null`
+  done | sort -n -r | head -n 20
 }
 
 # Helper for creating e.g. backups. Use: "filename-$DSTAMP.bak"
