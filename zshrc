@@ -82,14 +82,23 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^R" history-incremental-pattern-search-backward
 
+# Easier moving backwards
+# You can do either `cd ...` or just `...` in order to `cd ../../../` 
+setopt auto_cd
+setopt complete_aliases
+
+rationalize-dots() {
+	[[ $LBUFFER = *.. ]] && LBUFFER+=/.. || LBUFFER+=.
+}
+
+autoload rationalize-dots
+zle -N rationalize-dots
+bindkey . rationalize-dots
+
 # Aliases
 alias ls='ls --color=auto'
 alias l='ls -lah --color=auto'
 alias ll='ls -lAh --color=auto'
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-alias -g ......='../../../../..'
 alias rsync-copy="rsync -avz --progress -h"
 alias rsync-move="rsync -avz --progress -h --remove-source-files"
 alias rsync-update="rsync -avzu --progress -h"
