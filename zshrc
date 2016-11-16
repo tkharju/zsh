@@ -12,6 +12,9 @@ setopt completealiases
 setopt extendedglob
 setopt correct
 
+# Completion
+zstyle ':completion:*' special-dirs true
+
 # VCS info
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git hg
