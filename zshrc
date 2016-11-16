@@ -3,7 +3,7 @@
 # mkdir -p ~/.zsh/completions && curl "https://raw.githubusercontent.com/saltstack/salt/develop/pkg/zsh_completion.zsh" > ~/.zsh/completions/_salt
 fpath=( ~/.zsh/completions $fpath )
 
-autoload -Uz compinit promptinit colors up-line-or-beginning-search down-line-or-beginning-search
+autoload -Uz compinit promptinit colors up-line-or-beginning-search down-line-or-beginning-search url-quote-magic
 compinit
 promptinit
 colors
@@ -14,6 +14,9 @@ setopt correct
 
 # Completion
 zstyle ':completion:*' special-dirs true
+
+# Quote urls
+zle -N self-insert url-quote-magic
 
 # VCS info
 autoload -Uz vcs_info
