@@ -170,6 +170,16 @@ currdate() {
 }
 add-zsh-hook preexec currdate
 
+# Install z command for faster jumping into directories.
+# See: https://github.com/rupa/z
+# Usage: This should work:
+# cd ~/haltu/sysops
+# cd /tmp/foo
+# z sysops
+# you are now in ~/haltu/sysops
+alias haltu_install_z='mkdir -p $HOME/.zsh; curl https://raw.githubusercontent.com/rupa/z/master/z.sh -o $HOME/.zsh/z.sh; source $HOME/.zshrc'
+[[ -r ~/.zsh/z.sh ]] && . ~/.zsh/z.sh
+
 # You can add to ~/.zsh/local.zsh your mercurial and git settings
 # E.g:
 # export HGUSER=Tino Kiviharju <tino.kiviharju@haltu.fi>
@@ -177,6 +187,6 @@ add-zsh-hook preexec currdate
 # export GIT_AUTHOR_EMAIL=tino.kiviharju@haltu.fi
 # export GIT_COMMITTER_NAME=Tino Kiviharju
 # export GIT_COMMITTER_EMAIL=tino.kiviharju@haltu.fi
-[[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh ]]
+[[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh
 
 # vim: tw=0
