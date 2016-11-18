@@ -21,6 +21,8 @@ zstyle ':completion:*' cache-path ~/.cache/zsh
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 
 # Process completion shows all processes with colors
+# Usage: `kill -HUP guni<tab>` will give you list of running gunicorn processes.
+# Keep pressing tab to select the process you want to HUP
 zstyle ':completion:*:*:*:*:processes' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
 zstyle ':completion:*:*:*:*:processes' command 'ps -A -o pid,user,cmd'
