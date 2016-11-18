@@ -8,9 +8,11 @@ compinit
 promptinit
 colors
 
+# Opts
 setopt completealiases
 setopt extendedglob
 setopt correct
+setopt menu_complete
 
 # Completion
 zstyle ':completion:*' special-dirs true
@@ -27,6 +29,12 @@ zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -e -o pid,user,tt
 
 # List all processes for killall
 zstyle ':completion:*:processes-names' command "ps -eo cmd= | sed 's:\([^ ]*\).*:\1:;s:\(/[^ ]*/\)::;/^\[/d'"
+
+# Colorize completitions
+zstyle ':completion:*:parameters' list-colors '=*=32'
+zstyle ':completion:*:commands' list-colors '=*=1;31'
+zstyle ':completion:*:builtins' list-colors '=*=1;38;5;142'
+zstyle ':completion:*:aliases' list-colors '=*=2;38;5;128'
 
 # Quote urls
 zle -N self-insert url-quote-magic
