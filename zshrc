@@ -142,7 +142,24 @@ alias silent_push_hg="hg -q push &"
 alias install_vimrc="git clone -b server https://github.com/tkharju/vim.git $HOME/.vim; vim"
 alias pip="noglob pip"  # Allow square brackets
 
-# Git aliases borrowed from oh-my-zsh
+# Git helpers borrowed from oh-my-zsh
+function git_current_branch() {
+  local ref
+  ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
+}
+
+function _git_log_prettily(){
+  if ! [ -z $1 ]; then
+    git log --pretty=$1
+  fi
+}
+
 # In alphabetical order
 alias g='git'
 
