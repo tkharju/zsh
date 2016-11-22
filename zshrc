@@ -32,6 +32,9 @@ zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -e -o pid,user,tt
 # List all processes for killall
 zstyle ':completion:*:processes-names' command "ps -eo cmd= | sed 's:\([^ ]*\).*:\1:;s:\(/[^ ]*/\)::;/^\[/d'"
 
+# For ssh completion
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
 # Quote urls
 zle -N self-insert url-quote-magic
 
@@ -141,6 +144,11 @@ alias silent_push_hg="hg -q push &"
 alias tail_logs="tail -f **/*.log|ccze"
 alias tail_syslogs="tail -f /var/log/{messages,syslog,**/*.log}|ccze"
 alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc && source $HOME/.zshrc"
+
+compdef rsync-copy=rsync
+compdef rsync-move=rsync
+compdef rsync-synchronize=rsync
+compdef rsync-update=rsync
 
 # Mercurial helpers borrowed from oh-my-zsh
 alias hgc='hg commit'
