@@ -156,7 +156,7 @@ alias hglr='hg pull --rebase'
 alias hgo='hg outgoing'
 alias hgp='hg push'
 alias hgs='hg status'
-alias hgsl='hg log -G --limit 20 --template "{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n" '
+alias hgsl='hg log --limit 30 --template "{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n"'
 alias hgca='hg commit --amend'
 alias hgun='hg resolve --list'
 
