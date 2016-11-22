@@ -103,12 +103,12 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^R" history-incremental-pattern-search-backward
 
 # Easier moving backwards
-# You can do either `cd ...` or just `...` in order to `cd ../../../` 
+# You can do either `cd ...` or just `...` in order to `cd ../../../`
 setopt auto_cd
 setopt complete_aliases
 
 rationalize-dots() {
-	[[ $LBUFFER = *.. ]] && LBUFFER+=/.. || LBUFFER+=.
+  [[ $LBUFFER = *.. ]] && LBUFFER+=/.. || LBUFFER+=.
 }
 
 autoload rationalize-dots
@@ -116,31 +116,52 @@ zle -N rationalize-dots
 bindkey . rationalize-dots
 
 # Aliases
-alias ls='ls --color=auto'
-alias l='ls -lah --color=auto'
-alias ll='ls -lAh --color=auto'
-alias rsync-copy="rsync -avz --progress -h"
-alias rsync-move="rsync -avz --progress -h --remove-source-files"
-alias rsync-update="rsync -avzu --progress -h"
-alias rsync-synchronize="rsync -avzu --delete --progress -h"
 alias activate_development="export DJANGO_SETTINGS_MODULE=project.development"
+alias activate_local="export DJANGO_SETTINGS_MODULE=local_settings"
 alias activate_production="export DJANGO_SETTINGS_MODULE=project.production"
 alias activate_staging="export DJANGO_SETTINGS_MODULE=project.staging"
-alias activate_local="export DJANGO_SETTINGS_MODULE=local_settings"
-alias rootme="sudo -E su"
-alias rootzsh="sudo -E su -s /bin/zsh"
-alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc && source $HOME/.zshrc"
-alias salt="noglob salt"
-alias tail_logs="tail -f **/*.log|ccze"
-alias tail_syslogs="tail -f /var/log/{messages,syslog,**/*.log}|ccze"
 alias drun='docker run --rm -i -t -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v $(pwd):/home/foo/foo'
-alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold blue)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias gc="git commit -v"
+alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold blue)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias gnc='git log `git describe --tags --abbrev=0`..HEAD --oneline'
 alias gnd='git diff `git describe --tags --abbrev=0`..HEAD'
-alias silent_push_hg="hg -q push &"
 alias install_vimrc="git clone -b server https://github.com/tkharju/vim.git $HOME/.vim; vim"
+alias l='ls -lah --color=auto'
+alias ll='ls -lAh --color=auto'
+alias ls='ls --color=auto'
 alias pip="noglob pip"  # Allow square brackets
+alias rootme="sudo -E su"
+alias rootzsh="sudo -E su -s /bin/zsh"
+alias rsync-copy="rsync -avz --progress -h"
+alias rsync-move="rsync -avz --progress -h --remove-source-files"
+alias rsync-synchronize="rsync -avzu --delete --progress -h"
+alias rsync-update="rsync -avzu --progress -h"
+alias salt="noglob salt"
+alias silent_push_hg="hg -q push &"
+alias tail_logs="tail -f **/*.log|ccze"
+alias tail_syslogs="tail -f /var/log/{messages,syslog,**/*.log}|ccze"
+alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc && source $HOME/.zshrc"
+alias v="noglob vagrant"
+alias vssh="noglob vagrant ssh"
+compdef v=vagrant
+
+# Mercurial helpers borrowed from oh-my-zsh
+alias hgc='hg commit'
+alias hgb='hg branch'
+alias hgba='hg branches'
+alias hgbk='hg bookmarks'
+alias hgco='hg checkout'
+alias hgd='hg diff'
+alias hged='hg diffmerge'
+alias hgi='hg incoming'
+alias hgl='hg pull -u'
+alias hglr='hg pull --rebase'
+alias hgo='hg outgoing'
+alias hgp='hg push'
+alias hgs='hg status'
+alias hgsl='hg log -G --limit 20 --template "{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n" '
+alias hgca='hg commit --amend'
+alias hgun='hg resolve --list'
 
 # Git helpers borrowed from oh-my-zsh
 function git_current_branch() {
