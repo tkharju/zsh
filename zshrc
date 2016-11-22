@@ -13,6 +13,7 @@ setopt completealiases
 setopt extendedglob
 setopt correct
 setopt menu_complete
+setopt GLOB_COMPLETE
 
 # Completion
 zstyle ':completion:*' special-dirs true
@@ -128,6 +129,7 @@ alias gc="git commit -v"
 alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold blue)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias gnc='git log `git describe --tags --abbrev=0`..HEAD --oneline'
 alias gnd='git diff `git describe --tags --abbrev=0`..HEAD'
+alias grep='grep --color'
 alias install_vimrc="git clone -b server https://github.com/tkharju/vim.git $HOME/.vim; vim"
 alias l='ls -lah --color=auto'
 alias ll='ls -lAh --color=auto'
@@ -141,9 +143,15 @@ alias rsync-synchronize="rsync -avzu --delete --progress -h"
 alias rsync-update="rsync -avzu --progress -h"
 alias salt="noglob salt"
 alias silent_push_hg="hg -q push &"
+alias t='tail -f'
 alias tail_logs="tail -f **/*.log|ccze"
 alias tail_syslogs="tail -f /var/log/{messages,syslog,**/*.log}|ccze"
 alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc && source $HOME/.zshrc"
+alias zshrc='$EDITOR ~/.zshrc'
+
+# Global aliases
+# Use as cat /tmp/file G foo
+alias -g G="| grep -i --color"
 
 compdef rsync-copy=rsync
 compdef rsync-move=rsync
