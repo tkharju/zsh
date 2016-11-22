@@ -141,9 +141,6 @@ alias silent_push_hg="hg -q push &"
 alias tail_logs="tail -f **/*.log|ccze"
 alias tail_syslogs="tail -f /var/log/{messages,syslog,**/*.log}|ccze"
 alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc && source $HOME/.zshrc"
-alias v="noglob vagrant"
-alias vssh="noglob vagrant ssh"
-compdef v=vagrant
 
 # Mercurial helpers borrowed from oh-my-zsh
 alias hgc='hg commit'
