@@ -153,6 +153,14 @@ alias zshrc='$EDITOR ~/.zshrc'
 # Use as cat /tmp/file G foo
 alias -g G="| grep -i --color"
 
+# Suffix aliases
+alias -s txt="vim"
+alias -s rst="vim"
+alias -s md="vim"
+alias -s conf="vim"
+alias -s sls="vim"
+alias -s pp="vim"
+
 compdef rsync-copy=rsync
 compdef rsync-move=rsync
 compdef rsync-synchronize=rsync
