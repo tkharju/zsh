@@ -41,7 +41,7 @@ zle -N self-insert url-quote-magic
 
 # VCS info
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable hg git
+zstyle ':vcs_info:*' enable git hg
 zstyle ':vcs_info:*' get-revision true
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:hg*:*' formats "%{$fg[blue]%}[%s:%b]%{$reset_color%} %{$fg[green]%}%u%{$reset_color%}"
@@ -407,7 +407,7 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 
 # Set 256 colors to the terminal
 # Overwrite in ~/.zsh/local.zsh
-[[ $TMUX = ""  ]] && export TERM="xterm-256color"
+# [[ $TMUX = ""  ]] && export TERM="xterm-256color"
 
 # Exports
 export LANG="en_US.UTF-8"
