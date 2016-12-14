@@ -102,26 +102,35 @@ setopt PUSHD_MINUS
 bindkey -v
 bindkey -M vicmd 'k' history-beginning-search-backward-end
 bindkey -M vicmd 'j' history-beginning-search-forward-end
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^R" history-incremental-pattern-search-backward
 
-# make use with rxvt easier
-bindkey "\$terminfo[kcud1]" history-substring-search-down
-bindkey "\$terminfo[kcuu1]" history-substring-search-up
-bindkey -M viins "\$terminfo[kcud1]" history-substring-search-down
-bindkey -M viins "\$terminfo[kcuu1]" history-substring-search-up
-bindkey "\${terminfo[kcbt]}" reverse-menu-complete
-bindkey "\${terminfo[kcud1]}" down-line-or-beginning-search
-bindkey "\${terminfo[kcuu1]}" up-line-or-beginning-search
-bindkey "\${terminfo[kdch1]}" delete-char
-bindkey "\${terminfo[kend]}"  end-of-line
-bindkey "\${terminfo[khome]}" beginning-of-line
-bindkey "\${terminfo[knp]}" down-line-or-history
-bindkey "\${terminfo[kpp]}" up-line-or-history
+# Borrowed from oh-my-zsh
+if [[ "${terminfo[khome]}" != "" ]]; then
+  bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
+fi
+
+if [[ "${terminfo[kend]}" != "" ]]; then
+  bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
+fi
+
+bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
+
+if [[ "${terminfo[kcbt]}" != "" ]]; then
+  bindkey "${terminfo[kcbt]}" reverse-menu-complete   # [Shift-Tab] - move through the completion menu backwards
+fi
+
+bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
+if [[ "${terminfo[kdch1]}" != "" ]]; then
+  bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
+else
+  bindkey "^[[3~" delete-char
+  bindkey "^[3;5~" delete-char
+  bindkey "\e[3~" delete-char
+fi
 
 # Easier moving backwards
 # You can do either `cd ...` or just `...` in order to `cd ../../../`
