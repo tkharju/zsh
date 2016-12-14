@@ -109,6 +109,12 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^R" history-incremental-pattern-search-backward
 
+# make use with rxvt easier
+# https://bbs.archlinux.org/viewtopic.php?pid=201942#p201942
+bindkey "\e[3~" delete-char
+bindkey "\e[8~" end-of-line
+bindkey "\e[7~" beginning-of-line
+
 # Easier moving backwards
 # You can do either `cd ...` or just `...` in order to `cd ../../../`
 setopt auto_cd
