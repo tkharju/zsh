@@ -110,10 +110,20 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^R" history-incremental-pattern-search-backward
 
 # make use with rxvt easier
-# https://bbs.archlinux.org/viewtopic.php?pid=201942#p201942
-bindkey "\e[3~" delete-char
-bindkey "\e[8~" end-of-line
-bindkey "\e[7~" beginning-of-line
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey -M viins "$terminfo[kcud1]" history-substring-search-down
+bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up
+bindkey -M viins "\$terminfo[kcud1]" history-substring-search-down
+bindkey -M viins "\$terminfo[kcuu1]" history-substring-search-up
+bindkey "${terminfo[kcbt]}" reverse-menu-complete
+bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+bindkey "${terminfo[kdch1]}" delete-char
+bindkey "${terminfo[kend]}"  end-of-line
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[knp]}" down-line-or-history
+bindkey "${terminfo[kpp]}" up-line-or-history
 
 # Easier moving backwards
 # You can do either `cd ...` or just `...` in order to `cd ../../../`
