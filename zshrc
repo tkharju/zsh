@@ -138,7 +138,7 @@ setopt auto_cd
 setopt complete_aliases
 
 rationalize-dots() {
-  [[ $LBUFFER = *.. ]] && LBUFFER+=/.. || LBUFFER+=.
+  [[ $LBUFFER = *.. ]] && LBUFFER+=/../ || LBUFFER+=.
 }
 
 autoload rationalize-dots
