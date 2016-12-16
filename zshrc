@@ -12,7 +12,8 @@ colors
 setopt completealiases
 setopt extendedglob
 setopt correct
-setopt menu_complete
+unset menucomplete
+setopt automenu
 setopt GLOB_COMPLETE
 
 # Completion
