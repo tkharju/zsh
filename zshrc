@@ -151,7 +151,9 @@ alias activate_development="export DJANGO_SETTINGS_MODULE=project.development"
 alias activate_local="export DJANGO_SETTINGS_MODULE=local_settings"
 alias activate_production="export DJANGO_SETTINGS_MODULE=project.production"
 alias activate_staging="export DJANGO_SETTINGS_MODULE=project.staging"
+alias df='df -h'
 alias drun='docker run --rm -i -t -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v $(pwd):/home/foo/foo'
+alias du='du -h'
 alias gc="git commit -v"
 alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold blue)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias gnc='git log `git describe --tags --abbrev=0`..HEAD --oneline'
@@ -163,6 +165,7 @@ alias l='ls -lah --color=auto'
 alias ll='ls -lAh --color=auto'
 alias ls='ls --color=auto'
 alias pip="noglob pip"  # Allow square brackets
+alias pycclean="rm -rf **/*.pyc"
 alias rootme="sudo -E su"
 alias rootzsh="sudo -E su -s /bin/zsh"
 alias rsync-copy="rsync -avz --progress -h"
@@ -484,6 +487,18 @@ haltu_top_20_open_file_descriptors () {
     do echo `ls /proc/$x/fd 2> /dev/null | wc -l` $x `cat /proc/$x/cmdline 2> /dev/null`
   done | sort -n -r | head -n 20
 }
+
+# grep for process
+psgrep() {
+  ps auxf|grep -v grep|grep -i --color $1
+}
+
+# simple tree command if tree binary is not installed
+if [ -z "\${which tree}" ]; then
+  tree () {
+    find $@ -print | sed -e 's;[^/]*/;│────;g;s;────│; │;g'
+  }
+fi
 
 # Helper for creating e.g. backups. Use: "filename-$DSTAMP.bak"
 export DSTAMP
