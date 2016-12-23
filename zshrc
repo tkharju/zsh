@@ -493,6 +493,11 @@ psgrep() {
   ps auxf|grep -v grep|grep -i --color $1
 }
 
+# grep which process is listening on given tcp-port
+tcpgrep() {
+  lsof -i tcp:$1
+}
+
 # simple tree command if tree binary is not installed
 if [ -z "\${which tree}" ]; then
   tree () {
