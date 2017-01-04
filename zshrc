@@ -46,7 +46,8 @@ zstyle ':vcs_info:*' enable git hg
 zstyle ':vcs_info:*' get-revision true
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:hg*:*' formats "%{$fg[blue]%}[%s:%b]%{$reset_color%} %{$fg[green]%}%u%{$reset_color%}"
-zstyle ':vcs_info:git*:*' formats "%{$fg[blue]%}[%s:%b:%.6i]%{$reset_color%} %{$fg[green]%}%u %c%{$reset_color%}"
+zstyle ':vcs_info:git*:*' formats "%{$fg[blue]%}[%s:%b:%.6i]%{$reset_color%}%{$fg[green]%} %u %c%{$reset_color%}"
+zstyle ':vcs_info:git*:*' actionformats "%{$fg[blue]%}[%s:%b:%.6i]%{$reset_color%}%{$fg[green]%} %u %c %a%{$reset_color%}"
 precmd() { vcs_info }
 
 # Prompt
