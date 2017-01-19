@@ -488,6 +488,12 @@ haltu_top_20_open_file_descriptors () {
     do echo `ls /proc/$x/fd 2> /dev/null | wc -l` $x `cat /proc/$x/cmdline 2> /dev/null`
   done | sort -n -r | head -n 20
 }
+#
+# Helper to make curl requests with session
+# Usage: $ haltu_curl_with_sessionid foobar1234 http://service.with.session/
+haltu_curl_with_sessionid () {
+  curl --cookie "sessionid=$1" $2
+}
 
 # grep for process
 psgrep() {
