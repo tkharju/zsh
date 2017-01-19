@@ -161,7 +161,7 @@ alias gnc='git log `git describe --tags --abbrev=0`..HEAD --oneline'
 alias gnd='git diff `git describe --tags --abbrev=0`..HEAD'
 alias gns='git diff `git describe --tags --abbrev=0`..HEAD --stat'
 alias grep='grep --color'
-alias install_vimrc="git clone -b server https://github.com/tkharju/vim.git $HOME/.vim; vim"
+alias install_vimrc="git clone -b server https://github.com/tkharju/vim.git $HOME/.vim; ln -s $HOME/.vim/vimrc $HOME/.vimrc; vim"
 alias l='ls -lah --color=auto'
 alias ll='ls -lAh --color=auto'
 alias ls='ls --color=auto'
