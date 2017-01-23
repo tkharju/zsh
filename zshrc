@@ -529,6 +529,10 @@ add-zsh-hook preexec currdate
 alias haltu_install_z='mkdir -p $HOME/.zsh; curl https://raw.githubusercontent.com/rupa/z/master/z.sh -o $HOME/.zsh/z.sh; source $HOME/.zshrc'
 [[ -r ~/.zsh/z.sh ]] && . ~/.zsh/z.sh
 
+# Display motd
+if [[ -e /etc/motd ]]; then cat /etc/motd; fi
+if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
+
 # You can add to ~/.zsh/local.zsh your mercurial and git settings
 # E.g:
 # export HGUSER=Tino Kiviharju <tino.kiviharju@haltu.fi>
