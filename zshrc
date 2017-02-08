@@ -153,6 +153,12 @@ alias activate_local="export DJANGO_SETTINGS_MODULE=local_settings"
 alias activate_production="export DJANGO_SETTINGS_MODULE=project.production"
 alias activate_staging="export DJANGO_SETTINGS_MODULE=project.staging"
 alias df='df -h'
+alias djcompress='bin/django compress'
+alias djmigratelist='bin/django migrate --list'
+alias djshell='bin/django shell'
+alias djstatic='bin/django collectstatic --noinput'
+alias djsuperuser='bin/django createsuperuser'
+alias djsync='bin/django syncdb'
 alias drun='docker run --rm -i -t -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v $(pwd):/home/foo/foo'
 alias du='du -h'
 alias gc="git commit -v"
