@@ -155,6 +155,7 @@ alias activate_staging="export DJANGO_SETTINGS_MODULE=project.staging"
 alias df='df -h'
 alias djcompress='bin/django compress'
 alias djmigratelist='bin/django migrate --list'
+alias djmigrateshow='bin/django showmigrations'
 alias djshell='bin/django shell'
 alias djstatic='bin/django collectstatic --noinput'
 alias djsuperuser='bin/django createsuperuser'
