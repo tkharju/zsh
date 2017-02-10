@@ -172,6 +172,7 @@ alias install_vimrc="git clone -b server https://github.com/tkharju/vim.git $HOM
 alias l='ls -lah --color=auto'
 alias ll='ls -lAh --color=auto'
 alias ls='ls --color=auto'
+alias mkdir='mkdir -p'
 alias pip="noglob pip"  # Allow square brackets
 alias pycclean="rm -rf **/*.pyc"
 alias rootme="sudo -E su"
