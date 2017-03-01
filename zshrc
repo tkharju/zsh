@@ -1,6 +1,7 @@
 # Install custom completions under ~/.zsh/completions
 # e.g. to install salt completions
 # mkdir -p ~/.zsh/completions && curl "https://raw.githubusercontent.com/saltstack/salt/develop/pkg/zsh_completion.zsh" > ~/.zsh/completions/_salt
+# mkdir -p ~/.zsh/completions && curl "https://raw.githubusercontent.com/chmouel/oh-my-zsh-openshift/master/_oc" > ~/.zsh/completions/_oc
 fpath=( ~/.zsh/completions $fpath )
 
 autoload -Uz compinit promptinit colors up-line-or-beginning-search down-line-or-beginning-search url-quote-magic
@@ -251,6 +252,7 @@ alias gapa='git add --patch'
 
 alias gb='git branch'
 alias gba='git branch -a'
+alias gbvaa='git branch -vaa'
 alias gbd='git branch -d'
 alias gbda='git branch --no-color --merged | command grep -vE "^(\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
 alias gbl='git blame -b -w'
