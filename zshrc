@@ -189,6 +189,7 @@ alias tail_logs="tail -f **/*.log|ccze"
 alias tail_syslogs="tail -f /var/log/{messages,syslog,**/*.log}|ccze"
 alias update_zshrc="curl https://raw.githubusercontent.com/tkharju/zsh/master/zshrc > $HOME/.zshrc && source $HOME/.zshrc"
 alias zshrc='$EDITOR ~/.zshrc'
+alias zsudo='sudo -E su -s /bin/zsh'
 
 # Global aliases
 # Use as cat /tmp/file G foo
