@@ -492,6 +492,11 @@ haltu_check_certificate_dates () {
   echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates |awk -F'=' '{ print $2 }'
 }
 
+# Usage: $ haltu_print_certificate app.seepra.fi
+haltu_print_certificate () {
+  echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -text
+}
+
 # List top 20 prosesses with most open file descriptors
 # Output format: <amount of open fd> <pid> <command>
 haltu_top_20_open_file_descriptors () {
