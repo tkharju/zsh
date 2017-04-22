@@ -558,4 +558,7 @@ if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
 # export GIT_COMMITTER_EMAIL=tino.kiviharju@haltu.fi
 [[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh
 
+# Package `zsh-syntax-highlighting` on Ubuntu. Needs to be sourced at the end of this file
+[[ -r /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # vim: tw=0
