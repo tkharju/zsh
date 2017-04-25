@@ -207,6 +207,7 @@ compdef rsync-copy=rsync
 compdef rsync-move=rsync
 compdef rsync-synchronize=rsync
 compdef rsync-update=rsync
+compdef _docker drun=_docker_complete_images
 
 # Mercurial helpers borrowed from oh-my-zsh
 alias hgc='hg commit'
