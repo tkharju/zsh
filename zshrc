@@ -1,10 +1,10 @@
 # Install custom completions under ~/.zsh/completions
-# e.g. to install salt completions
+# For example:
 # mkdir -p ~/.zsh/completions && curl "https://raw.githubusercontent.com/saltstack/salt/develop/pkg/zsh_completion.zsh" > ~/.zsh/completions/_salt
 # mkdir -p ~/.zsh/completions && curl "https://raw.githubusercontent.com/chmouel/oh-my-zsh-openshift/master/_oc" > ~/.zsh/completions/_oc
 fpath=( ~/.zsh/completions $fpath )
 
-autoload -Uz compinit promptinit colors up-line-or-beginning-search down-line-or-beginning-search url-quote-magic
+autoload -Uz compinit promptinit colors up-line-or-beginning-search down-line-or-beginning-search url-quote-magic zmv
 compinit
 promptinit
 colors
@@ -162,6 +162,8 @@ alias djstatic='bin/django collectstatic --noinput'
 alias djsuperuser='bin/django createsuperuser'
 alias djsync='bin/django syncdb'
 alias drun='docker run --rm -i -t -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v $(pwd):/home/foo/foo'
+alias drun_bew='docker run --rm -i -t -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v $(pwd):/home/bew/bew'
+alias drun_vagrant='docker run --rm -i -t -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v /dev/vboxdrv:/dev/vboxdrv -v $(pwd):/home/bew/bew --privileged'
 alias du='du -h'
 alias gc="git commit -v"
 alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold blue)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all"
@@ -183,6 +185,8 @@ alias rsync-move="rsync -avz --progress -h --remove-source-files"
 alias rsync-synchronize="rsync -avzu --delete --progress -h"
 alias rsync-update="rsync -avzu --progress -h"
 alias salt="noglob salt"
+alias salt-cp="noglob salt-cp"
+alias salt-run="noglob salt-run"
 alias silent_push_hg="hg -q push &"
 alias t='tail -f'
 alias tail_logs="tail -f **/*.log|ccze"
@@ -208,6 +212,23 @@ compdef rsync-move=rsync
 compdef rsync-synchronize=rsync
 compdef rsync-update=rsync
 compdef _docker drun=_docker_complete_images
+compdef _docker drun_bew=_docker_complete_images
+compdef _docker drun_vagrant=_docker_complete_images
+
+# Docker-compose helpers borrowed from oh-my-zsh
+alias dco='docker-compose'
+alias dcb='docker-compose build'
+alias dce='docker-compose exec'
+alias dcps='docker-compose ps'
+alias dcrestart='docker-compose restart'
+alias dcrm='docker-compose rm'
+alias dcr='docker-compose run'
+alias dcstop='docker-compose stop'
+alias dcup='docker-compose up'
+alias dcdn='docker-compose down'
+alias dcl='docker-compose logs'
+alias dclf='docker-compose logs -f'
+compdef dco=docker-compose
 
 # Mercurial helpers borrowed from oh-my-zsh
 alias hgc='hg commit'
@@ -448,10 +469,6 @@ alias glum='git pull upstream master'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip--"'
 
-# Set 256 colors to the terminal
-# Overwrite in ~/.zsh/local.zsh
-# [[ $TMUX = ""  ]] && export TERM="xterm-256color"
-
 # Exports
 export LANG="en_US.UTF-8"
 export LANGUAGE="en_US:en"
@@ -483,6 +500,7 @@ haltu_install_security_updates () {
 }
 
 # Block hackers
+# Usage: $ haltu_iptables_block_IP aaa.bbb.cccc.ddd
 haltu_iptables_block_IP () {
   iptables -I INPUT -s $1 -j DROP
   iptables -v -L INPUT
@@ -561,5 +579,9 @@ if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
 
 # Package `zsh-syntax-highlighting` on Ubuntu. Needs to be sourced at the end of this file
 [[ -r /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+ZSH_HIGHLIGHT_STYLES[default]=none
+ZSH_HIGHLIGHT_STYLES[path]=none
+ZSH_HIGHLIGHT_STYLES[suffix-alias]="fg=green"
+ZSH_HIGHLIGHT_STYLES[precommand]="fg=green"
+#
 # vim: tw=0
