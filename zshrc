@@ -215,21 +215,6 @@ compdef _docker drun=_docker_complete_images
 compdef _docker drun_bew=_docker_complete_images
 compdef _docker drun_vagrant=_docker_complete_images
 
-# Docker-compose helpers borrowed from oh-my-zsh
-alias dco='docker-compose'
-alias dcb='docker-compose build'
-alias dce='docker-compose exec'
-alias dcps='docker-compose ps'
-alias dcrestart='docker-compose restart'
-alias dcrm='docker-compose rm'
-alias dcr='docker-compose run'
-alias dcstop='docker-compose stop'
-alias dcup='docker-compose up'
-alias dcdn='docker-compose down'
-alias dcl='docker-compose logs'
-alias dclf='docker-compose logs -f'
-compdef dco=docker-compose
-
 # Mercurial helpers borrowed from oh-my-zsh
 alias hgc='hg commit'
 alias hgb='hg branch'
@@ -578,10 +563,13 @@ if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
 [[ -r ~/.zsh/local.zsh ]] && . ~/.zsh/local.zsh
 
 # Package `zsh-syntax-highlighting` on Ubuntu. Needs to be sourced at the end of this file
-[[ -r /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_HIGHLIGHT_STYLES[default]=none
-ZSH_HIGHLIGHT_STYLES[path]=none
-ZSH_HIGHLIGHT_STYLES[suffix-alias]="fg=green"
-ZSH_HIGHLIGHT_STYLES[precommand]="fg=green"
-#
+if [[ -r /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]
+then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ZSH_HIGHLIGHT_STYLES[default]=none
+  ZSH_HIGHLIGHT_STYLES[path]=none
+  ZSH_HIGHLIGHT_STYLES[suffix-alias]="fg=green"
+  ZSH_HIGHLIGHT_STYLES[precommand]="fg=green"
+fi
+
 # vim: tw=0
