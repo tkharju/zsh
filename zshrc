@@ -508,12 +508,19 @@ haltu_top_20_open_file_descriptors () {
     do echo `ls /proc/$x/fd 2> /dev/null | wc -l` $x `cat /proc/$x/cmdline 2> /dev/null`
   done | sort -n -r | head -n 20
 }
-#
+
 # Helper to make curl requests with session
 # Usage: $ haltu_curl_with_sessionid foobar1234 http://service.with.session/
 haltu_curl_with_sessionid () {
   curl --cookie "sessionid=$1" $2
 }
+
+# Helper to query server host keys
+# Usage: $ haltu_get_server_host_keys server.haltu.net
+haltu_get_server_host_keys() {
+   ssh-keygen -l -f /dev/stdin <<<`ssh-keyscan $1 2>/dev/null|sort`
+}
+compdef haltu_get_server_host_keys=ssh
 
 # grep for process
 psgrep() {
