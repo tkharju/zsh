@@ -518,7 +518,7 @@ haltu_curl_with_sessionid () {
 # Helper to query server host keys
 # Usage: $ haltu_get_server_host_keys server.haltu.net
 haltu_get_server_host_keys() {
-   ssh-keygen -l -f /dev/stdin <<<`ssh-keyscan $1 2>/dev/null|sort`
+   sudo nmap -p 22 $1 --script ssh-hostkey
 }
 compdef haltu_get_server_host_keys=ssh
 
