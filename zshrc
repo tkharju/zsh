@@ -290,6 +290,7 @@ alias gcm='git checkout master'
 alias gcd='git checkout develop'
 alias gcmsg='git commit -m'
 alias gco='git checkout'
+compdef _git gco=git-checkout
 alias gcount='git shortlog -sn'
 compdef _git gcount
 alias gcp='git cherry-pick'
@@ -559,6 +560,12 @@ alias haltu_install_z='mkdir -p $HOME/.zsh; curl https://raw.githubusercontent.c
 # Display motd
 if [[ -e /etc/motd ]]; then cat /etc/motd; fi
 if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
+
+# Package `git-flow` on Ubuntu.
+if [[ -r /usr/share/git-flow/git-flow-completion.zsh ]]
+then
+  source /usr/share/git-flow/git-flow-completion.zsh
+fi
 
 # You can add to ~/.zsh/local.zsh your mercurial and git settings
 # E.g:
