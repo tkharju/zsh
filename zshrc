@@ -494,13 +494,15 @@ haltu_iptables_block_IP () {
 
 # Usage: $ haltu_check_certificate_dates app.seepra.fi
 haltu_check_certificate_dates () {
-  echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -dates |awk -F'=' '{ print $2 }'
+  echo | openssl s_client -servername $1 -connect $1:443 2>/dev/null | openssl x509 -noout -dates |awk -F'=' '{ print $2 }'
 }
+compdef haltu_check_certificate_dates=ssh
 
 # Usage: $ haltu_print_certificate app.seepra.fi
 haltu_print_certificate () {
-  echo | openssl s_client -connect $1:443 2>/dev/null | openssl x509 -noout -text
+  echo | openssl s_client -servername $1 -connect $1:443 2>/dev/null | openssl x509 -noout -text
 }
+compdef haltu_print_certificate=ssh
 
 # List top 20 prosesses with most open file descriptors
 # Output format: <amount of open fd> <pid> <command>
