@@ -525,6 +525,12 @@ haltu_get_server_host_keys() {
 }
 compdef haltu_get_server_host_keys=ssh
 
+# Helper to check if TCP port is open
+# Usage: $ haltu_check_open_port server.haltu.net 443
+haltu_check_open_port() {
+   nc -w 2 -v -z $1 $2
+}
+
 # grep for process
 psgrep() {
   ps auxf|grep -v grep|grep -i --color $1
