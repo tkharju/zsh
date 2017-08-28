@@ -478,9 +478,15 @@ haltu_remove_old_kernels () {
 }
 
 # For new Ubuntu servers
+
+haltu_pending_security_updates () {
+  echo "Security updates not installed on this machine"
+  sudo unattended-upgrade --dry-run -d 2>&1 /dev/null | grep 'Checking' | grep security | awk '{ print $2  }'
+}
+
 haltu_install_security_updates () {
   echo "Packages to be installed"
-  /usr/lib/update-notifier/apt-check -p
+  sudo unattended-upgrade --dry-run -d 2>&1 /dev/null | grep 'Checking' | grep security | awk '{ print $2  }'
   echo "Installing updates"
   sudo unattended-upgrade -v
 }
