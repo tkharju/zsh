@@ -9,6 +9,9 @@ compinit
 promptinit
 colors
 
+# Life is hard and shell should be hardened
+umask 077
+
 # Opts
 setopt completealiases
 setopt extendedglob
