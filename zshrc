@@ -526,6 +526,22 @@ haltu_top_20_open_file_descriptors () {
 haltu_curl_with_sessionid () {
   curl --cookie "sessionid=$1" $2
 }
+#
+# Helper to get page load timing with curl
+# Usage: $ haltu_curl_timing https://service.url/
+# Example:
+# $ haltu_curl_timing https://haltu.fi/
+# time_namelookup:    0.509
+# time_connect:       0.719
+# time_appconnect:    1.776
+# time_pretransfer:   1.776
+# time_redirect:      0.000
+# time_starttransfer: 2.506
+# ----------
+# time_total:         2.568
+haltu_curl_timing() {
+  curl  -w "time_namelookup:    %{time_namelookup}\ntime_connect:       %{time_connect}\ntime_appconnect:    %{time_appconnect}\ntime_pretransfer:   %{time_pretransfer}\ntime_redirect:      %{time_redirect}\ntime_starttransfer: %{time_starttransfer}\n----------\ntime_total:         %{time_total}\n" -o /dev/null -s $1
+}
 
 # Helper to query server host keys
 # Usage: $ haltu_get_server_host_keys server.haltu.net
