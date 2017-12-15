@@ -68,7 +68,10 @@ function check_build_status() {
   if command -v git >/dev/null 2>&1
   then
     build_status=$(git config build.status)
-    build_status="[$build_status]"
+    if [[ $build_status != '' ]]
+    then
+      build_status="[$build_status]"
+    fi
   fi
 }
 add-zsh-hook precmd check_build_status
