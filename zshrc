@@ -61,19 +61,30 @@ if [ "$USER" = "root" ]; then
     color="red"
 fi;
 
+function check_build_status() {
+  # For this to work you need to save build status with command "git config build.status foo"
+  build_status=$(git config build.status)
+  if [[ $build_status != '' ]]
+  then
+    build_status="[$build_status]"
+  else
+    build_status=''
+  fi
+}
+add-zsh-hook precmd check_build_status
+
 export VIRTUAL_ENV_DISABLE_PROMPT=yes
 function virtenv_indicator {
-  if [[ -z $VIRTUAL_ENV  ]] then
+  if [[ -z $VIRTUAL_ENV ]] then
     psvar[1]=''
   else
     psvar[1]=${VIRTUAL_ENV##*/}
   fi
 }
-
 add-zsh-hook precmd virtenv_indicator
 
 prompt='%(1j.%{$fg[red]%}[%j]%{$reset_color%}.)[%T]%{$fg[green]%}[%{$fg[$color]%}%n%{$reset_color%}%{$fg[green]%}@%M]%{$reset_color%}${vcs_info_msg_0_}
-%{$fg[yellow]%}%(1V.(%1v).)%{$reset_color%}%{$fg[cyan]%}[%~]%{$reset_color%}
+%{$fg[yellow]%}%(1V.(%1v).)%{$reset_color%}%{$fg[cyan]%}[%~]%{$reset_color%}${build_status}
 %(!.#.$) '
 
 # History
@@ -190,6 +201,7 @@ alias rsync-update="rsync -avzu --progress -h"
 alias salt="noglob salt"
 alias salt-cp="noglob salt-cp"
 alias salt-run="noglob salt-run"
+alias salt-ssh="noglob salt-ssh"
 alias silent_push_hg="hg -q push &"
 alias t='tail -F'
 alias tail_logs="tail -F **/*.log|ccze"
@@ -554,6 +566,16 @@ compdef haltu_get_server_host_keys=ssh
 # Usage: $ haltu_check_open_port server.haltu.net 443
 haltu_check_open_port() {
    nc -w 2 -v -z $1 $2
+}
+
+# Helper to view info on installed package
+# Usage: $ haltu_package_info vim
+haltu_package_info() {
+   apt-cache policy $1
+   if read -q "REPLY?Do you want to view package changelog? [y/n] "
+   then
+      apt changelog $1
+   fi
 }
 
 # grep for process
