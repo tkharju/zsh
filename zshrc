@@ -574,6 +574,7 @@ haltu_check_open_port() {
 # Helper to view info on installed package
 # Usage: $ haltu_package_info vim
 haltu_package_info() {
+   aptitude show $1
    apt-cache policy $1
    if read -q "REPLY?Do you want to view package changelog? [y/n] "
    then
