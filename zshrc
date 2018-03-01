@@ -25,6 +25,11 @@ zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+# https://superuser.com/questions/415650/does-a-fuzzy-matching-mode-exist-for-the-zsh-shell
+ zstyle ':completion:*' matcher-list '' \
+  'm:{a-z\-}={A-Z\_}' \
+  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+  'r:|?=** m:{a-z\-}={A-Z\_}'
 
 # Process completion shows all processes with colors
 # Usage: `kill -HUP guni<tab>` will give you list of running gunicorn processes.
@@ -541,7 +546,7 @@ haltu_top_20_open_file_descriptors () {
 haltu_curl_with_sessionid () {
   curl --cookie "sessionid=$1" $2
 }
-#
+
 # Helper to get page load timing with curl
 # Usage: $ haltu_curl_timing https://service.url/
 # Example:
