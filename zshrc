@@ -9,6 +9,9 @@ compinit
 promptinit
 colors
 
+# Use bash completions
+autoload -U +X bashcompinit && bashcompinit
+
 # Life is hard and shell should be hardened
 umask 077
 
@@ -51,7 +54,7 @@ zle -N self-insert url-quote-magic
 
 # VCS info
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git hg
+zstyle ':vcs_info:*' enable ALL
 zstyle ':vcs_info:*' get-revision true
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:hg*:*' formats "%{$fg[blue]%}[%s:%b]%{$reset_color%} %{$fg[green]%}%u%{$reset_color%}"
@@ -199,6 +202,7 @@ alias ll='ls -lAh --color=auto'
 alias ls='ls --color=auto'
 alias mkdir='mkdir -p'
 alias pip="noglob pip"  # Allow square brackets
+alias pp_json='python -mjson.tool' # curl http:/foo |pp_json for pretty print
 alias pycclean="rm -rf **/*.pyc"
 alias rootme="sudo -E su"
 alias rootzsh="sudo -E su -s /bin/zsh"
@@ -212,8 +216,8 @@ alias salt-run="noglob salt-run"
 alias salt-ssh="noglob salt-ssh"
 alias salt-call="noglob salt-call"
 alias sp="noglob salt-call publish.publish"
-compdef sp=salt
 alias silent_push_hg="hg -q push &"
+alias svim="sudo vim"
 alias t='tail -F'
 alias tail_logs="tail -F **/*.log|ccze"
 alias tail_syslogs="tail -F /var/log/{messages,syslog,**/*.log}|ccze"
